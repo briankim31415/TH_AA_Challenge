@@ -10,9 +10,9 @@ conn.commit()
 c.execute('''INSERT INTO rrline values('2', 'Jeemin Han', '12:34')''')
 conn.commit()
 
-t = ('2')
-c.execute('DELETE FROM rrline where passenger_id=?' ,t)
+# t = ('2')
+# c.execute('DELETE FROM rrline where passenger_id=?' ,t)
 
-c.execute('SELECT * FROM rrline')
+c.execute('SELECT length(time) FROM rrline')
 
-print(c.fetchone())
+print(int(str(c.fetchone()).split(',')[0].lstrip('(')))

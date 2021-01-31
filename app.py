@@ -5,6 +5,9 @@ import requests
 import urllib.request
 import json
 import folium
+import os.path
+
+save_path = './templates'
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -32,7 +35,6 @@ def index():
         flight_json = json.loads(url)
         ft_nb = str(session.get('flight-number'))
         for flight in flight_json:
-            print(flight['flightNumber'])
             if str(flight['flightNumber']) == ft_nb:
                 depart = {'city':flight['origin']['city'],'latitude':flight['origin']['location']['latitude'],'longitude':flight['origin']['location']['longitude']}
                 destin = {'city':flight['destination']['city'],'latitude':flight['destination']['location']['latitude'],'longitude':flight['destination']['location']['longitude']}
@@ -49,7 +51,7 @@ def index():
                 m = folium.Map(location=[(lat1+lat2)/2,(long1+long2)/2], zoom_start=5)
                 folium.Marker(location=[lat1,long1]).add_to(m)
                 folium.Marker(location=[lat2,long2]).add_to(m)
-                m.save('map.html')
+                m.save(os.path.join(save_path, 'map.html'))
 
         return render_template('home.html')
     # url = urllib.request.urlopen('https://aa-flight.herokuapp.com/flights?date=2020-01-01&origin=DFW').read()
@@ -113,6 +115,7 @@ def flight_menu():
 
 @app.route('/bathroom.html', methods = ['GET', 'POST'])
 def bathroom():
+
     return render_template('bathroom.html')
 
 @app.route('/map.html')
