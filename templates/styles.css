@@ -3,6 +3,16 @@
   font-weight: bold;
 }
 
+.text-color {
+  color: #0878ce;
+}
+
+h1 {
+  color: #0878ce;
+  fonts-family: Roboto;
+  font-weight: bold;
+}
+
 img {
   display: block;
   margin-left: auto;
