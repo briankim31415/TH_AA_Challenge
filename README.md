@@ -1,6 +1,6 @@
-##TAMUHack American Airlines Challenge
+# TAMUHack American Airlines Challenge
 
-https://github.com/AmericanAirlines/Flight-Engine/wiki/TAMUHACK-2021
+Thousands of people fly American each and every day. This awesome responsibility opens the door to incredible opportunities. Help us elevate the customer travel experience, boost operational efficiency and employee performance (baggage handling, gate agents, etc.), or enhance American's brand image with your innovative hacks!
 
 What does your project do? How will it make a difference? What technologies are used?
 
@@ -9,7 +9,6 @@ AA-RON stands for American Airlines Responsive Online Network. It's a webapp bui
 
 
 
-Thousands of people fly American each and every day. This awesome responsibility opens the door to incredible opportunities. Help us elevate the customer travel experience, boost operational efficiency and employee performance (baggage handling, gate agents, etc.), or enhance American's brand image with your innovative hacks!
 
 Purpose: Make people feel safer and be safer on flights
 
