@@ -33,5 +33,9 @@ We should definitely spend more time thinking out our plan before we begin! We w
 ## What's next for AA-RON
 Hopefully, we can implement an actual chat so that if needed the customer can speak with a flight attendant, we also could implement a mobile apps and push it to the app store and google play store. There are a lot more safety features that we can implement, to help people curb the transmission of COVID such as being able to get more optimized meal time so that passengers don't have to take their masks off at the same time as other passengers, or also implement contact tracing through the app. There are a lot more things that we could do, but we're really happy with the way that the app turned out.
 
+## More Info
+
+https://docs.google.com/document/d/1h5rz4Ik-hw43wHZiyeAF3mOOJyB3DfqgkXqebSvNhG8/edit?usp=sharing
+
 
 
