@@ -73,40 +73,8 @@ def index():
                 m.save(os.path.join(save_path, 'map.html'))
 
         return render_template('home.html')
-    # url = urllib.request.urlopen('https://aa-flight.herokuapp.com/flights?date=2020-01-01&origin=DFW').read()
-    # flight_json = json.loads(url)
-    # return flight_json[0]['flightNumber']
+    # return render_template('home.html')
     return render_template('index.html')
-
-# @app.route('/flight_data.html')
-# def data():
-#     date_str = str(datetime.now()).split(' ')[0]
-#     url = urllib.request.urlopen('https://aa-flight.herokuapp.com/flights?date=' + date_str + '&origin=DFW').read()
-#     flight_json = json.loads(url)
-#     ft_nb = str(session.get('flight-number'))
-#     for flight in flight_json:
-#         print(flight['flightNumber'])
-#         if str(flight['flightNumber']) == ft_nb:
-#             depart = {'city':flight['origin']['city'],'latitude':flight['origin']['location']['latitude'],'longitude':flight['origin']['location']['longitude']}
-#             destin = {'city':flight['destination']['city'],'latitude':flight['destination']['location']['latitude'],'longitude':flight['destination']['location']['longitude']}
-#             total_flight = {'time':flight['duration']['locale'],'distance':flight['distance']}
-#             # session['dplat'] = float(depart['latitude'])
-#             # session['dplong'] = -float(depart['longitude'])
-#             # session['dslat'] = float(destin['latitude'])
-#             # session['dslong'] = -float(destin['longitude'])
-#             lat1 = float(depart['latitude'])
-#             long1 = -float(depart['longitude'])
-#             lat2 = float(destin['latitude'])
-#             long2 = -float(destin['longitude'])
-
-#             m = folium.Map(location=[(lat1+lat2)/2,(long1+long2)/2], zoom_start=5)
-#             folium.Marker(location=[lat1,long1]).add_to(m)
-#             folium.Marker(location=[lat2,long2]).add_to(m)
-#             m.save('map.html')
-
-#         # return render_template('index.html')
-#             return render_template('flight_data.html' , dpcity = depart['city'], dplat = depart['latitude'], dplong = depart['longitude'], \
-#                 dscity = destin['city'], dslat = destin['latitude'], dslong = destin['longitude'], ft_time = total_flight['time'], distance = total_flight['distance'])
 
 @app.route('/chat.html')
 def chat():
@@ -118,7 +86,8 @@ def hub():
 
 @app.route('/home.html', methods = ['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    print(session.get('name'))
+    return render_template('home.html' , name = session.get('name'))
         
 @app.route('/store.html')
 def store():
