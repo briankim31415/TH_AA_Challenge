@@ -49,9 +49,14 @@ def data():
             # session['dplong'] = -float(depart['longitude'])
             # session['dslat'] = float(destin['latitude'])
             # session['dslong'] = -float(destin['longitude'])
-            m = folium.Map(location=[(float(depart['latitude'])+float(destin['latitude']))/2,(-float(depart['longitude'])+-float(destin['longitude']))/2], zoom_starts=7)
-            folium.Marker(location=[float(depart['latitude']),-float(depart['longitude'])]).add_to(m)
-            folium.Marker(location=[float(destin['latitude']),-float(destin['longitude'])]).add_to(m)
+            lat1 = float(depart['latitude'])
+            long1 = -float(depart['longitude'])
+            lat2 = float(destin['latitude'])
+            long2 = -float(destin['longitude'])
+
+            m = folium.Map(location=[(lat1+lat2)/2,(long1+long2)/2], zoom_start=5)
+            folium.Marker(location=[lat1,long1]).add_to(m)
+            folium.Marker(location=[lat2,long2]).add_to(m)
             m.save('map.html')
 
         # return render_template('index.html')
