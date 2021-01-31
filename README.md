@@ -1,4 +1,4 @@
-TAMUHack American Airlines Challenge
+##TAMUHack American Airlines Challenge
 
 https://github.com/AmericanAirlines/Flight-Engine/wiki/TAMUHACK-2021
 
