@@ -6,6 +6,8 @@ class AARON:
 
     def parse_input(self, user_in):
         user_in = user_in.lower()
+        if 'help' in user_in:
+            return 'help'
         if 'lavatory' in user_in or 'bathroom' in user_in or 'restroom' in user_in:
             return 'lavatory'
         if 'food' in user_in or 'drink' in user_in or 'beverage' in user_in or 'eat' in user_in or 'snack' in user_in:
@@ -18,6 +20,8 @@ class AARON:
             return 'status'
         if 'about me' in user_in:
             return 'about'
+        else:
+            return "Sorry, didn't quite catch that."
 
     def help(self):
         return("Things I can help with:\n• Lavatory wait list\n• Food & beverage delivery\n• Complaints\n• Call human attendant\n• Flight stats")
@@ -96,3 +100,6 @@ class AARON:
 
     def about_me(self):
         return("My name is AA-RON, short for American Airlines-Responsive Online Network. To learn more about my namesake, watch this video: https://www.youtube.com/watch/Dd7FixvoKBw")
+
+    def finish(self):
+        return False

@@ -24,19 +24,19 @@ def add_to_list(passenger):
     passenger = passenger.replace(' ','_')
     ran = random.randint(5321,12359)
     curr_time = str(datetime.now())[11:16]
-    c.execute('INSERT INTO rrline values({},{},{})' .format(ran, passenger, curr_time))
+    c.execute('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
     conn.commit()
-    print('INSERT INTO rrline values({},{},{})' .format(ran, passenger, curr_time))
+    print('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
 
 def remove_from_list(id):
-    c.execute('DELETE FROM rrline where passenger_id=?' ,str(id))
+    id = str(id)
+    c.execute('DELETE FROM rrline where passenger_id=(?)',[id])
+    conn.commit()
 
 def query():
     c.execute('SELECT length(time) FROM rrline')
     print(c.fetchall())
     return((int(str(c.fetchone()).split(',')[0].lstrip('('))))
+
+c.close()
     
-
-
-# add_to_list('Jeemin Han')
-query()

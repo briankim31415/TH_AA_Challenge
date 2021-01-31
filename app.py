@@ -6,6 +6,8 @@ import urllib.request
 import json
 import folium
 import os.path
+import random
+# from restroom import add_to_list, remove_from_list, query
 
 save_path = './templates'
 
@@ -19,7 +21,24 @@ try:
 except:
     pass
 conn.commit()
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+
+def add_to_list(passenger):
+    passenger = passenger.replace(' ','_')
+    ran = random.randint(5321,12359)
+    curr_time = str(datetime.now())[11:16]
+    c.execute('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
+    conn.commit()
+    print('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
+
+def remove_from_list(id):
+    id = str(id)
+    c.execute('DELETE FROM rrline where passenger_id=(?)',[id])
+    conn.commit()
+
+def query():
+    c.execute('SELECT length(time) FROM rrline')
+    print(c.fetchall())
+    return((int(str(c.fetchone()).split(',')[0].lstrip('('))))
 
 
 
@@ -115,15 +134,19 @@ def flight_menu():
 
 @app.route('/bathroom.html', methods = ['GET', 'POST'])
 def bathroom():
-    # if request.method == "GET":
-    #     return render_template('bathroom_available.html')
-    # c.execute('SELECT length(time) FROM rrline')
-    # if (int(str(c.fetchone()).split(',')[0].lstrip('(')) > 0):
-    #     return render_template('bathroom_not_available.html')
-    # elif (int(str(c.fetchone()).split(',')[0].lstrip('(')) <= 0):
-    #     return render_template('bathroom_available.html')
+    if request.method == "GET":
+        num_line = query()
+        if num_line > 0:
+            return render_template('bathroom_not_available.html' , num_line = num_line )
+        else:
+            return render_template ('bathroom_available.html')
     return render_template('bathroom.html')
 
+@app.route('/bathroom_not_available.html', methods = ['POST'])
+def join_line():
+    if request.method == "GET":
+        add_to_list(session.get('name'))
+        return render_template ('home.html')
 @app.route('/map.html')
 def map():
     return render_template('map.html')
@@ -133,3 +156,4 @@ def map():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    c.close()
