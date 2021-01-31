@@ -7,57 +7,56 @@ import json
 import folium
 import os.path
 import random
-from flask_sqlalchemy import SQLAlchemy
-# from restroom import add_to_list, remove_from_list, query
+# from flask_sqlalchemy import SQLAlchemy
 
 
 
 save_path = './templates'
 
 app = Flask(__name__)
-app.secret_key = "hello"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.secret_key = "hello"
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["DEBUG"] = True
 # conn = sqlite3.connect('rr.db')
 # c = conn.cursor()
-# app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
+app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 # try:
 #     c.execute('''CREATE TABLE rrline (passenger_id, passenger_name, time)''')
 # except:
 #     pass
 # conn.commit()
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
+#
+# class rrline(db.Model):
+#     _id = db.Column("id", db.Integer, primary_key = True)
+#     passenger_name = db.Column(db.String(100))
+#     timestamp = db.Column(db.String(10))
+#
+#     def __init__(self):
+#         self.passenger_name = passenger_name
+#         self. timestamp = timestamp
 
-class rrline(db.Model):
-    _id = db.Column("id", db.Integer, primary_key = True)
-    passenger_name = db.Column(db.String(100))
-    timestamp = db.Column(db.String(10))
-
-    def __init__(self):
-        self.passenger_name = passenger_name
-        self. timestamp = timestamp
 
 
-
-def add_to_list(passenger):
-    passenger = passenger.replace(' ','_')
-    ran = random.randint(5321,12359)
-    curr_time = str(datetime.now())[11:16]
-    c.execute('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
-    conn.commit()
-    print('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
-
-def remove_from_list(id):
-    id = str(id)
-    c.execute('DELETE FROM rrline where passenger_id=(?)',[id])
-    conn.commit()
-
-def query():
-    c.execute('SELECT length(time) FROM rrline')
-    print(c.fetchall())
-    return((int(str(c.fetchone()).split(',')[0].lstrip('('))))
+# def add_to_list(passenger):
+#     passenger = passenger.replace(' ','_')
+#     ran = random.randint(5321,12359)
+#     curr_time = str(datetime.now())[11:16]
+#     c.execute('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
+#     conn.commit()
+#     print('INSERT INTO rrline values(?,?,?)',(ran, passenger, curr_time))
+#
+# def remove_from_list(id):
+#     id = str(id)
+#     c.execute('DELETE FROM rrline where passenger_id=(?)',[id])
+#     conn.commit()
+#
+# def query():
+#     c.execute('SELECT length(time) FROM rrline')
+#     print(c.fetchall())
+#     return((int(str(c.fetchone()).split(',')[0].lstrip('('))))
 
 
 
@@ -66,6 +65,7 @@ def index():
     if request.method == "POST":
         name = request.form['name']
         session['name'] = name
+        print(name)
         flight_num = request.form['flight-number']
         session['flight-number'] = flight_num
         date_str = str(datetime.now()).split(' ')[0]
@@ -107,7 +107,7 @@ def hub():
 def home():
     print(session.get('name'))
     return render_template('home.html' , name = session.get('name'))
-        
+
 @app.route('/store.html')
 def store():
     return render_template('store.html')
@@ -147,4 +147,4 @@ def map():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    c.close()
+    # c.close()
