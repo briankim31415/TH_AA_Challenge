@@ -74,7 +74,23 @@ def hub():
 @app.route('/home.html', methods = ['GET', 'POST'])
 def home():
     return render_template('home.html')
-    
+        
+@app.route('/store.html')
+def store():
+    return render_template('store.html')
+
+@app.route('/flight_schedule.html')
+def flight_sched():
+    return render_template('flight_schedule.html')
+
+@app.route('/flight_menu.html')
+def flight_menu():
+    return render_template('flight_menu.html')
+
+@app.route('/bathroom.html', methods = ['GET', 'POST'])
+def bathroom():
+    return render_template('bathroom.html')
+
 
 # @app.route('/')
 
