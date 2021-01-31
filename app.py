@@ -115,7 +115,13 @@ def flight_menu():
 
 @app.route('/bathroom.html', methods = ['GET', 'POST'])
 def bathroom():
-
+    # if request.method == "GET":
+    #     return render_template('bathroom_available.html')
+    # c.execute('SELECT length(time) FROM rrline')
+    # if (int(str(c.fetchone()).split(',')[0].lstrip('(')) > 0):
+    #     return render_template('bathroom_not_available.html')
+    # elif (int(str(c.fetchone()).split(',')[0].lstrip('(')) <= 0):
+    #     return render_template('bathroom_available.html')
     return render_template('bathroom.html')
 
 @app.route('/map.html')
