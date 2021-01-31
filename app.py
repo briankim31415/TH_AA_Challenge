@@ -7,20 +7,39 @@ import json
 import folium
 import os.path
 import random
+from flask_sqlalchemy import SQLAlchemy
 # from restroom import add_to_list, remove_from_list, query
+
+
 
 save_path = './templates'
 
 app = Flask(__name__)
+app.secret_key = "hello"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["DEBUG"] = True
-conn = sqlite3.connect('rr.db')
-c = conn.cursor()
-app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
-try:
-    c.execute('''CREATE TABLE rrline (passenger_id, passenger_name, time)''')
-except:
-    pass
-conn.commit()
+# conn = sqlite3.connect('rr.db')
+# c = conn.cursor()
+# app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
+# try:
+#     c.execute('''CREATE TABLE rrline (passenger_id, passenger_name, time)''')
+# except:
+#     pass
+# conn.commit()
+
+db = SQLAlchemy(app)
+
+class rrline(db.Model):
+    _id = db.Column("id", db.Integer, primary_key = True)
+    passenger_name = db.Column(db.String(100))
+    timestamp = db.Column(db.String(10))
+
+    def __init__(self):
+        self.passenger_name = passenger_name
+        self. timestamp = timestamp
+
+
 
 def add_to_list(passenger):
     passenger = passenger.replace(' ','_')
@@ -103,6 +122,9 @@ def flight_menu():
 
 @app.route('/bathroom.html', methods = ['GET', 'POST'])
 def bathroom():
+    if request.method == 'POST':
+        db.session.add(rrline)
+        print(user.query.filter_by(username='missing').first())
     if request.method == "GET":
         num_line = query()
         if num_line > 0:
